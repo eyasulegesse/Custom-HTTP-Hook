@@ -1,22 +1,13 @@
-import logo from './logo.svg';
 import './App.css';
-
+import useFetch from './hooks/http-hook';
 function App() {
+  const { data, loading, error } = useFetch('/posts', 'get');
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <div className='App'>
+      <header className='App-header'>
+        {data?.map((post) => {
+          return <h1>{post.title}</h1>;
+        })}
       </header>
     </div>
   );
